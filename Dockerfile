@@ -34,11 +34,12 @@ RUN chsh -s /bin/bash user && \
     unzip /tmp/simsun.zip -d /home/user/.wine/drive_c/windows/Fonts && \
     chown -R user:user /home/user/.wine && \
     mkdir /home/user/coolq && \
-    rm -rf /home/user/.cache /tmp/* /etc/wgetrc
+    if [ "$SAVE_CACHE" = "0" ]; then rm -rf /home/user/.cache /tmp/* /etc/wgetrc; fi
 
 ENV LANG=zh_CN.UTF-8 \
     LC_ALL=zh_CN.UTF-8 \
     TZ=Asia/Shanghai \
-    COOLQ_URL=http://dlsec.cqp.me/cqa-tuling
+    COOLQ_URL=http://dlsec.cqp.me/cqa-tuling \
+    SAVE_CACHE=0
 
 VOLUME ["/home/user/coolq"]
